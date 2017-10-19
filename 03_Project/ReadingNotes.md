@@ -1,9 +1,17 @@
-# Reading notes on explosive directed percolation
+# Explosive directed percolation project
 
 From the overview:
 > ... here we introduce two percolation models on a set of rank-ordered nodes where edges are added monotonically with respect to the rank ordering...
 
 They claim this is analogous to networks such as Twitter followings/responses to the Higgs-Boson discovery.
+
+## Next steps:
+- [ ] Set up time to meet with Prof Gull to walk through this
+- [ ] Do these practice exercises:
+  - [ ] [Introduction to networks](http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/ComputerExercises/Networks/NetworksExercise.html)
+  - [ ] [Percolation](http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/ComputerExercises/Percolation/Percolation.html)
+- [ ] Mock up ODER and C-ODER simulations
+
 
 ## Model 1: Ordered, Directed Erdos-Renyi (ODER)
 - Generalization of the directer ER model to ordered graph
@@ -28,3 +36,31 @@ They claim this is analogous to networks such as Twitter followings/responses to
     - They also have some nice discussion and a numerical analysis
 2. Find the critical exponents..? i.e. can I replicate their results?
 3. Investigate the rank-separation phenomena in the C-ODER process
+
+
+## Potential hiccups:
+- Not intuitive how to visualize these networks easily-- will likely require me putting together something
+
+## Outline:
+- Introduction
+  - What is percolation?
+  - What is directed versus undirected percolation?
+  - What is rank ordering, in the context of percolation?
+  - What is the state of the art here?
+  - What is the Erdos-Renyi model of percolation, and why might you want to change that?
+- Question/what I set out to do
+  - Replicate two percolation model implementations
+  - MAYBE: Compare to behavior in the tweets they show
+  - Also try a middle-of-the-road percolation model of my own
+  - Demonstrate a discontinuity in its clustering behavior
+- Relevant science:
+  - Finding the critical point in a different types of percolation
+  - Studying the critical phenomena of percolation models
+- Relevant computational methods:
+  - Had to seriously upgrade my clustering methods: HK > Newman-Ziff > what they implement in this paper
+  - "Methods of scaling and critical phenomena for studying the phase transition for percolation"
+- Methods
+  - ODER and C-ODER percolation models
+  - Clustering algorithm: different from Newman-Ziff
+- Results
+  - TBD
