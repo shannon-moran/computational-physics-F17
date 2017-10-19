@@ -7,6 +7,7 @@ They claim this is analogous to networks such as Twitter followings/responses to
 
 ## Next steps:
 - [ ] Set up time to meet with Prof Gull to walk through this
+- [ ] Read papers from Ziff on directed and explosive percolation
 - [ ] Do these practice exercises:
   - [ ] [Introduction to networks](http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/ComputerExercises/Networks/NetworksExercise.html)
   - [ ] [Percolation](http://pages.physics.cornell.edu/~myers/teaching/ComputationalMethods/ComputerExercises/Percolation/Percolation.html)
