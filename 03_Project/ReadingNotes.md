@@ -32,7 +32,7 @@ They claim this is analogous to networks such as Twitter followings/responses to
   - TBD
 
 ## Introduction
-### Network sciecne background
+### Network science background
 - Erdos-Renyi graphs (random, non-directed graphs): [link here](https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model)
 - Directed Erdos-Renyi graphs, DER (directed edges)
 - Paper covers two models:
@@ -69,6 +69,8 @@ They claim this is analogous to networks such as Twitter followings/responses to
 
 ### Packages I will use:
 - Pandas, numpy, scipy
+- [Networkx](https://networkx.github.io/)
+  - Has package for building ER graphs: [doc](https://networkx.github.io/documentation/stable/tutorial.html#graph-generators-and-graph-operations)
 - [Pypercolate](http://pypercolate.readthedocs.io/en/stable/pypercolate.html): Python implementation of Newman-Ziff algorithm
   - However, N-Z does not work for directed networks; I will need to adapt this based on the algorithm presented in the paper
 
