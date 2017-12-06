@@ -14,10 +14,16 @@ import itertools
 import math
 import random
 
+# ADDED BY SHANNON
+import functools
+
 import networkx as nx
-from .classic import empty_graph, path_graph, complete_graph
-from .degree_seq import degree_sequence_tree
+from networkx.generators.classic import empty_graph, path_graph, complete_graph
+from networkx.generators.degree_seq import degree_sequence_tree
 from collections import defaultdict
+
+from multiprocessing import Pool
+from multiprocessing.dummy import Pool as ThreadPool
 
 # __all__ = ['fast_gnp_random_graph',
 #            'gnp_random_graph',
@@ -114,6 +120,10 @@ def fast_gnp_random_graph(n, p, seed=None, directed=False):
                 G.add_edge(v, w)
     return G
 
+def add_edge(edges, G, p):
+    for e in edges:
+        if random.random() < p:
+            G.add_edge(e)
 
 def gnp_random_graph(n, p, seed=None, directed=False):
     """Returns a $G_{n,p}$ random graph, also known as an Erdős-Rényi graph
@@ -161,7 +171,13 @@ def gnp_random_graph(n, p, seed=None, directed=False):
     else:
         edges = itertools.combinations(range(n), 2)
 
-    for e in edges:
-        if random.random() < p:
-            G.add_edge(*e)
+
+    pool = ThreadPool(2)
+    pool.map(add_edge, itertools.repeat(edges,G=G,p=p)
+    # pool.map(edge_lambda, edges)
+    pool.close()
+    pool.join()
+    # for e in edges:
+    #     if random.random() < p:
+    #         G.add_edge(*e)
     return G

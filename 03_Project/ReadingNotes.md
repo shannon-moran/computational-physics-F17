@@ -9,9 +9,10 @@ They claim this is analogous to networks such as Twitter followings/responses to
 
 ## Outline:
 - Introduction
-  - What is percolation?
-  - What is directed versus undirected percolation?
-  - What is rank ordering, in the context of percolation?
+  - What is percolation? How is explosive percolation different?
+  - Networks:
+    - Undirected versus directed?
+    - Ordered versus not?
   - What is the state of the art here?
   - What is the Erdos-Renyi model of percolation, and why might you want to change that?
 - Question/what I set out to do
@@ -19,7 +20,7 @@ They claim this is analogous to networks such as Twitter followings/responses to
     - MAYBE: Compare to behavior in the tweets they show
   - Also try a middle-of-the-road percolation model of my own
   - Demonstrate a discontinuity in its clustering behavior
-- Relevant science:
+- Relevant science from class:
   - Finding the critical point in a different types of percolation
   - Studying the critical phenomena of percolation models
 - Relevant computational methods:
