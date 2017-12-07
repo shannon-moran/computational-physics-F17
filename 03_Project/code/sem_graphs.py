@@ -171,13 +171,7 @@ def gnp_random_graph(n, p, seed=None, directed=False):
     else:
         edges = itertools.combinations(range(n), 2)
 
-
-    pool = ThreadPool(2)
-    pool.map(add_edge, itertools.repeat(edges,G=G,p=p)
-    # pool.map(edge_lambda, edges)
-    pool.close()
-    pool.join()
-    # for e in edges:
-    #     if random.random() < p:
-    #         G.add_edge(*e)
+    for e in edges:
+        if random.random() < p:
+            G.add_edge(*e)
     return G
