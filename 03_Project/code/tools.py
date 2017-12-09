@@ -109,28 +109,14 @@ def ranked_SCC(connected_components,rank=1):
     if rank>len(C): return 0
     return sorted(C)[-rank]
 
-def time_slice(array,start,end):
-    time_slice = np.zeros((array.shape[0],array.shape[1]))
-    # np.place(time_slice,(array<start)*(array!=0),0)
-    # print(np.where(time_slice!=0))
-    np.place(time_slice,(array>end)*(array!=0),0)
-    # print(np.where(time_slice!=0))
-    np.place(time_slice,array!=0,1)
-    # print(np.where(time_slice!=0))
-    return time_slice
-
 '''
 Ah, switching from using tuple edges and order means i have to switch how I do this
 '''
 def binary_search(graph,start,end,LJ):
     midpoint = int(round((start+end)/2))
-    # head = ranked_SCC(tarjan(time_slice(graph.edges,0,start+1)))
-    # mid = ranked_SCC(tarjan(time_slice(graph.edges,0,midpoint)))
-    # tail = ranked_SCC(tarjan(time_slice(graph.edges,0,end)))
-    # by all these different time points, want to see what the largest cluster is
-    head = ranked_SCC(tarjan(time_slice(graph.edges,0,start+1)))
-    mid = ranked_SCC(tarjan(time_slice(graph.edges,0,midpoint)))
-    tail = ranked_SCC(tarjan(time_slice(graph.edges,0,end)))
+    head = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=start)))
+    mid = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=midpoint)))
+    tail = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=end)))
     # print(head,mid,tail)
     if abs(end-start)==1:
         if (tail-head)>LJ: LJ = (tail-head)
@@ -145,26 +131,13 @@ def binary_search(graph,start,end,LJ):
     return LJ
 
 def get_largest_jump(graph):
-    start = 0
+    start = 1
     midpoint = int(round(graph.m/2))
     end = graph.m-1
     print(start,midpoint,end)
-    # check that there are at least the right numbers on either side of the midpoint
-    print(len(np.where(graph.edges>midpoint)[0]))
-    print(len(np.where((graph.edges<midpoint)*(graph.edges!=0))[0]))
-    head = np.zeros((graph.edges.shape[0],graph.edges.shape[1]))
-    np.place(head,graph.edges>(start+1),0)
-    mid = np.zeros((graph.edges.shape[0],graph.edges.shape[1]))
-    np.place(mid,graph.edges>midpoint,0)
-    tail = np.zeros((graph.edges.shape[0],graph.edges.shape[1]))
-    np.place(tail,graph.edges>end,0)
-    print(np.sum(head),np.sum(mid),np.sum(tail))
-    head = ranked_SCC(tarjan(head))
-    mid = ranked_SCC(tarjan(mid))
-    tail = ranked_SCC(tarjan(tail))
-    # print(np.sum(time_slice(graph.edges,start,start+1)))
-    # print(np.sum(time_slice(graph.edges,start,midpoint)))
-    # print(np.sum(time_slice(graph.edges,start,end)))
+    head = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=start)))
+    mid = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=midpoint)))
+    tail = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=end)))
     print(head,mid,tail)
     LJ = 0
     if (tail-head)<(graph.n/100): return tail

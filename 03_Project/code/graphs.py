@@ -18,8 +18,9 @@ class Graph(object):
         self.m = int(m)
         self.n_list = np.linspace(0,self.n-1,self.n).astype(int)
         self.edge_density = m/n
+        self.phi = self.edge_density/n
         # tracks edges & orders them by when they were added
-        self.edges = np.zeros((n,n))
+        self.edges = np.zeros((n,n),dtype=np.dtype('f4'))
         self.nodes = 0
         self.LJ = 0
         self.process = process_name
@@ -48,7 +49,7 @@ class Graph(object):
                 self.add_edge(proposed_edge)
 
     def ODER(self):
-        pbar = tqdm_notebook(total=(self.m-self.nodes),desc="Implementing ODER process")
+        pbar = tqdm(total=(self.m-self.nodes),desc="Implementing ODER process")
         while self.nodes<self.m:
             first_node, second_node = random.sample(list(self.n_list),2)
             proposed_edge = tuple(sorted((first_node,second_node)))
