@@ -3,8 +3,6 @@ import time
 from tqdm import tqdm,tqdm_notebook
 import itertools
 import numpy as np
-import pandas as pd
-import scipy
 import random
 import networkx as nx
 from collections import defaultdict
@@ -25,10 +23,11 @@ class Graph(object):
         self.LJ = 0
         self.process = process_name
 
-    def initialize(self):
+    def build(self):
         if self.process=='CODER': self.CODER()
         elif self.process=='ODER': self.ODER()
-        else: print('initialize with a valid process')
+        elif self.process=='DER': self.DER()
+        else: print('build with a valid process')
 
     def add_edge(self,p):
         if self.edges[p[0],p[1]]:
@@ -37,22 +36,35 @@ class Graph(object):
         else: self.nodes+=1; self.edges[p[0],p[1]] = self.nodes
 
     def CODER(self):
+        pbar = tqdm_notebook(total=(self.m-self.nodes),desc="Building CODER graph")
         while self.nodes<self.m:
             first_node, second_node, third_node = random.sample(list(self.n_list),3)
             proposed_edges = tuple(itertools.combinations(tuple(sorted((first_node,second_node,third_node))), 2))
-
             # for nodes with min difference, check if they/their reverse already exist; if no, add them
             difference = np.asarray([nodes[1]-nodes[0] for nodes in proposed_edges])
             idx = np.where(difference == difference.min())[0]
+            n0 = self.nodes
             for i in idx:
                 proposed_edge = proposed_edges[i]
                 self.add_edge(proposed_edge)
+            pbar.update(self.nodes-n0)
+        pbar.close()
 
     def ODER(self):
-        pbar = tqdm(total=(self.m-self.nodes),desc="Implementing ODER process")
+        pbar = tqdm_notebook(total=(self.m-self.nodes),desc="Building ODER graph")
         while self.nodes<self.m:
             first_node, second_node = random.sample(list(self.n_list),2)
             proposed_edge = tuple(sorted((first_node,second_node)))
+            n0 = self.nodes
+            self.add_edge(proposed_edge)
+            pbar.update(self.nodes-n0)
+        pbar.close()
+
+    def DER(self):
+        pbar = tqdm_notebook(total=(self.m-self.nodes),desc="Building DER graph")
+        while self.nodes<self.m:
+            first_node, second_node = random.sample(list(self.n_list),2)
+            # proposed_edge = tuple(sorted((first_node,second_node)))
             n0 = self.nodes
             self.add_edge(proposed_edge)
             pbar.update(self.nodes-n0)

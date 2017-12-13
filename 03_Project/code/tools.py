@@ -1,10 +1,7 @@
 # Import needed packages
 import time
-from tqdm import tqdm,tqdm_notebook
 import itertools
 import numpy as np
-import pandas as pd
-import scipy
 import random
 import networkx as nx
 from collections import defaultdict
@@ -13,27 +10,7 @@ import matplotlib.pyplot as plt
 # =========
 # Helper functions
 # =========
-#
-# def edges_to_viz(edges,n):
-#     viz_array = np.zeros((n,n))
-#     for i in edges:
-#         viz_array[i[0],i[1]]+=1
-#     return viz_array
-#
-# def edges_to_children(edges):
-#     children = defaultdict(list)
-#     for u,v in edges:
-#         children[u].append(v)
-#     return children
 
-# def matrix_to_dict(graph):
-#     children = defaultdict(list)
-#     for u in range(ODER_test.edges.shape[0]):
-#         child = np.where(ODER_test.edges[u]==1)[0].tolist()
-#         children[u].append(child)
-#     return children
-
-# probably should make this !=0, then can just use order matrix
 def neighbors(adjacency_matrix):
     neighblist = np.where(adjacency_matrix[node,:]>0)[0]
     return neighblist
@@ -65,8 +42,7 @@ def tarjan(edges):
 
             # find the children
             try:
-                children = np.where(edges[node,:]!=0)[0]
-#                 print(children)
+                children = np.where(edges[node]!=0)[0]
             except:
                 children = []
             for child in children:
@@ -117,6 +93,7 @@ def binary_search(graph,start,end,LJ):
     head = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=start)))
     mid = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=midpoint)))
     tail = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=end)))
+    # print(start, midpoint, end)
     # print(head,mid,tail)
     if abs(end-start)==1:
         if (tail-head)>LJ: LJ = (tail-head)
@@ -134,18 +111,16 @@ def get_largest_jump(graph):
     start = 1
     midpoint = int(round(graph.m/2))
     end = graph.m-1
-    print(start,midpoint,end)
     head = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=start)))
     mid = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=midpoint)))
     tail = ranked_SCC(tarjan((graph.edges>0)*(graph.edges<=end)))
-    print(head,mid,tail)
+    # print(start,midpoint,end)
+    # print(head,mid,tail)
     LJ = 0
-    if (tail-head)<(graph.n/100): return tail
-    elif (mid-head)>(graph.n/100):
-        jump = binary_search(graph,start,midpoint,LJ)
-    elif (tail-mid)>(graph.n/100):
-        jump = binary_search(graph,midpoint,end,LJ)
+    if (tail-head)<(graph.n/100): jump = (tail-head)
+    else: jump = binary_search(graph,start,midpoint,LJ)
+    # print('jump: %s'%jump)
     return jump
-
-def nothing():
-    pass
+#
+# def nothing():
+#     pass
