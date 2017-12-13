@@ -11,19 +11,17 @@ import matplotlib.pyplot as plt
 # Helper functions
 # =========
 
-def neighbors(adjacency_matrix):
-    neighblist = np.where(adjacency_matrix[node,:]>0)[0]
-    return neighblist
+def matrix_to_nx(adjacency_matrix):
+    edge_locations=np.where(adjacency_matrix>0)
+    edges = []
+    for i in range(len(edge_locations)):
+        edges.append((edge_locations[0][i]+1,edge_locations[1][i]+1))
+    return edges
 
 # =========
 # Component clustering algorithm
 # =========
 
-'''
-input: adjacency matrix of edges, nxn matrix
-output: connected components,list of tuples
-desired outpu: array of node values with cluster it's in (like HK)
-'''
 def tarjan(edges):
         index_counter = [0]
         index = {}
@@ -42,7 +40,7 @@ def tarjan(edges):
 
             # find the children
             try:
-                children = np.where(edges[node]!=0)[0]
+                children = np.where(edges[node]!=0)[0] # i think this actually needs to have 1 added to it...?
             except:
                 children = []
             for child in children:

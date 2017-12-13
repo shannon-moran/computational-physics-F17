@@ -24,7 +24,7 @@ class Graph(object):
         self.process = process_name
 
     def build(self):
-        if self.process=='CODER': self.CODER()
+        if self.process=='C-ODER': self.CODER()
         elif self.process=='ODER': self.ODER()
         elif self.process=='DER': self.DER()
         else: print('build with a valid process')
@@ -36,7 +36,7 @@ class Graph(object):
         else: self.nodes+=1; self.edges[p[0],p[1]] = self.nodes
 
     def CODER(self):
-        pbar = tqdm_notebook(total=(self.m-self.nodes),desc="Building CODER graph")
+        pbar = tqdm_notebook(total=(self.m-self.nodes),desc="Building C-ODER graph")
         while self.nodes<self.m:
             first_node, second_node, third_node = random.sample(list(self.n_list),3)
             proposed_edges = tuple(itertools.combinations(tuple(sorted((first_node,second_node,third_node))), 2))
@@ -63,8 +63,8 @@ class Graph(object):
     def DER(self):
         pbar = tqdm_notebook(total=(self.m-self.nodes),desc="Building DER graph")
         while self.nodes<self.m:
-            first_node, second_node = random.sample(list(self.n_list),2)
-            # proposed_edge = tuple(sorted((first_node,second_node)))
+            first_node, second_node = random.choice(list(self.n_list)),random.choice(list(self.n_list))
+            proposed_edge = tuple((first_node,second_node))
             n0 = self.nodes
             self.add_edge(proposed_edge)
             pbar.update(self.nodes-n0)
