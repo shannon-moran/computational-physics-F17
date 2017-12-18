@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{Waagen_2017}
+Alex Waagen, Raissa~M. D'Souza, and Tsai-Ching Lu.
+\newblock Explosive percolation on directed networks due to monotonic flow of
+  activity.
+\newblock {\em Physical Review E}, 96(1), Jul 2017.
+
+\bibitem{Achlioptas_2009}
+Dimitris Achlioptas, Raissa~M. D'Souza, and Joel Spencer.
+\newblock Explosive percolation in random networks.
+\newblock {\em Science}, 323(5920):1453--1455, 2009.
+
+\bibitem{Tarjan_1972}
+Robert~T. Tarjan.
+\newblock Depth-first search and linear graph algorithms.
+\newblock {\em SIAM Journal on Computing}, 1(2), 1972.
+
+\bibitem{Nagler_2011}
+Jan Nagler, Anna Levina, and March Timme.
+\newblock Impact of single links in competitive percolation.
+\newblock {\em Nature Physics}, 7:265--270, 2011.
+
+\end{thebibliography}

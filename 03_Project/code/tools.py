@@ -11,13 +11,6 @@ import matplotlib.pyplot as plt
 # Helper functions
 # =========
 
-def matrix_to_nx(adjacency_matrix):
-    edge_locations=np.where(adjacency_matrix>0)
-    edges = []
-    for i in range(len(edge_locations)):
-        edges.append((edge_locations[0][i]+1,edge_locations[1][i]+1))
-    return edges
-
 # =========
 # Component clustering algorithm
 # =========
